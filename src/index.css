@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'GamjaFlower-Regular';
+  src: url('/fonts/GamjaFlower-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: 'GamjaFlower-Regular';
+}

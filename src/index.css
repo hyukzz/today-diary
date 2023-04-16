@@ -11,3 +11,8 @@
 * {
   font-family: 'GamjaFlower-Regular';
 }
+
+body {
+  background-image: url('image/paper_background.jpg');
+  background-size: cover;
+}

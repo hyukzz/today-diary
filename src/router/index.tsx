@@ -26,18 +26,6 @@ const routerData: RouterElement[] = [
     label: '로그인',
     element: <Auth />,
   },
-  {
-    id: 3,
-    path: '/diarywrite',
-    label: 'DiaryWrite',
-    element: <DiaryWritePage />,
-  },
-  {
-    id: 4,
-    path: '/diary',
-    label: 'Diary',
-    element: <DiaryList />,
-  },
 ];
 
 export const routers: RemixRouter = createBrowserRouter(

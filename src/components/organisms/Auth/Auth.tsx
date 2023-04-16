@@ -1,21 +1,29 @@
-import { useState } from 'react';
-import { signInWithPopup, onAuthStateChanged } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 import { auth, provider } from '@/firebase/config';
 import google_logo from '@/assets/Logo/google_logo.svg';
 
 const Auth = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  const onSocialClick = async () => {
-    await signInWithPopup(auth, provider);
+  const onGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
+        const accessToken = await user.getIdToken();
+
+        localStorage.setItem('uid', user.uid);
+        localStorage.setItem('accessToken', accessToken);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  onAuthStateChanged(auth, (user) => {
+  auth.onAuthStateChanged((user) => {
     if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
+      navigate('/');
     }
   });
 
@@ -23,7 +31,7 @@ const Auth = () => {
     <>
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2"
-        onClick={onSocialClick}
+        onClick={onGoogleLogin}
         name="google"
       >
         <img src={google_logo} alt="Google Logo" className="w-6 h-6" />

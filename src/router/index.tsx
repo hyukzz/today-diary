@@ -2,7 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Router as RemixRouter } from '@remix-run/router/dist/router';
 
 import Test from '@/components/pages/Test';
+import DiaryWritePage from '@/components/pages/DiaryWritePage';
 import Auth from '@/components/organisms/Auth/Auth';
+import DiaryList from '@/components/organisms/DiaryList/DiaryList';
 
 interface RouterElement {
   id: number;
@@ -23,6 +25,18 @@ const routerData: RouterElement[] = [
     path: '/login',
     label: '로그인',
     element: <Auth />,
+  },
+  {
+    id: 3,
+    path: '/diarywrite',
+    label: 'DiaryWrite',
+    element: <DiaryWritePage />,
+  },
+  {
+    id: 4,
+    path: '/diary',
+    label: 'Diary',
+    element: <DiaryList />,
   },
 ];
 

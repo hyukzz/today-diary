@@ -13,6 +13,6 @@
 }
 
 body {
-  background-image: url('image/paper_background.jpg');
+  background-image: url('/public/image/paper_background.jpg');
   background-size: cover;
 }

@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from '@/firebase/config';
+import { useAuthContext } from '@/components/atoms/Context/Context';
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { removeAuthData } = useAuthContext();
 
   const onLogout = async () => {
     await auth.signOut();
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('uid');
 
+    removeAuthData();
     navigate('/login');
   };
 

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from '@/firebase/config';
-import { useAuthContext } from '@/components/atoms/Context/Context';
+import { useAuthContext } from '@/components/molecules/Context/Context';
 import { notification } from '@/components/atoms/Toast';
 
 const Logout = () => {
@@ -18,9 +18,9 @@ const Logout = () => {
   };
 
   return (
-    <>
+    <div className="text-lg text-blue-500 font-semibold select-none rounded focus:outline-none">
       <button onClick={onLogout}>로그아웃</button>
-    </>
+    </div>
   );
 };
 

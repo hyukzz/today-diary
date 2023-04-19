@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from '@/firebase/config';
-import { useAuthContext } from '@/components/molecules/Context/Context';
+import { useAuthContext } from '../Context/Context';
 import { notification } from '@/components/atoms/Toast';
 
 const Logout = () => {

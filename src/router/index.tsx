@@ -7,7 +7,7 @@ import MainPage from '@/components/pages/MainPage';
 import Navbar from '@/components/molecules/Navbar/Navbar';
 import Auth from '@/components/organisms/Auth/Auth';
 import NotFound from '@/components/pages/NotFound';
-import { useAuthContext } from '@/components/molecules/Context/Context';
+import { useAuthContext } from '../components/molecules/Context/Context';
 
 interface RouterElement {
   id: number;

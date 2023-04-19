@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 
-import { useAuthContext } from '@/components/atoms/Context/Context';
+import { useAuthContext } from '../../molecules/Context/Context';
 import { auth, provider } from '@/firebase/config';
 import google_logo from '@/assets/Logo/google_logo.svg';
 import { notification } from '@/components/atoms/Toast';

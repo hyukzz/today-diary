@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import Logout from '@/components/molecules/Logout/Logout';
-import { useAuthContext } from '@/components/molecules/Context/Context';
+import { useAuthContext } from '../Context/Context';
 import apple_logo from '@/assets/Logo/apple_logo.svg';
 
 const Navbar = () => {

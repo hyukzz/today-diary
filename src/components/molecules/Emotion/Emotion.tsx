@@ -1,9 +1,9 @@
-import { Emotion } from '@/@types/types';
-import Happy from '@/assets/emotionIcon/happy.png';
-import HappyDisabled from '@/assets/emotionIcon/happy_disabled.png';
+import { EmotionType } from '@/@types/types';
+import Happy from '../../../assets/Emotion/happy.png';
+import HappyDisabled from '../../../assets/Emotion/happy_disabled.png';
 
 type EmotionIconProps = {
-  category: Emotion;
+  category: EmotionType;
   selected?: boolean;
   size?: number;
 };

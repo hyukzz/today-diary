@@ -4,19 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { setDoc, doc } from 'firebase/firestore';
 
 import { db } from '@/firebase/config';
-import { Emotion } from '@/@types/types';
+import { EmotionType } from '@/@types/types';
 import { Diary } from '@/@types/types';
 import { notification } from '@/components/atoms/Toast';
 import { DateForm } from '@/components/atoms/Date';
 import { useAuthContext } from '@/components/molecules/Context/Context';
-import EmotionIcon from '@/components/molecules/EmotionIcon/EmotionIcon';
+import Emotion from '@/components/molecules/Emotion/Emotion';
 
 const DiaryWirte = () => {
   const navigate = useNavigate();
   const { isLoggedIn, uid } = useAuthContext();
 
-  const emotions: Emotion[] = ['기쁨', '슬픔', '설렘', '애매', '화남'];
-  const [selectedEmotion, setSelectedEmotion] = useState<Emotion>('애매');
+  const emotions: EmotionType[] = ['기쁨', '슬픔', '설렘', '애매', '화남'];
+  const [selectedEmotion, setSelectedEmotion] = useState<EmotionType>('애매');
   const [text, setText] = useState('');
 
   const [iconSize, setIconSize] = useState(
@@ -76,7 +76,7 @@ const DiaryWirte = () => {
 
         <p className="text-3xl md:text-4xl font-bold text-black text-center">오늘 하루 어땠어?</p>
 
-        <EmotionIcon category={selectedEmotion} selected={true} size={iconSize} />
+        <Emotion category={selectedEmotion} selected={true} size={iconSize} />
       </div>
 
       <div
@@ -97,7 +97,7 @@ const DiaryWirte = () => {
                 onClick={() => setSelectedEmotion(emotion)}
                 className="inline-block cursor-pointer"
               >
-                <EmotionIcon
+                <Emotion
                   category={emotion}
                   selected={emotion === selectedEmotion}
                   size={innerHeight < 1024 ? 3.5 : 6}

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.1",
     "deploy": "^1.0.3",
     "firebase": "^9.19.1",
     "init": "^0.1.2",
@@ -16,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
+    "uuid": "^9.0.0",
     "vite-plugin-svgr": "^2.4.0",
     "vite-tsconfig-paths": "^4.0.8"
   },

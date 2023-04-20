@@ -5,6 +5,7 @@ import { Router as RemixRouter } from '@remix-run/router/dist/router';
 import { ChildrenProps } from '@/@types/types.d';
 import MainPage from '@/components/pages/MainPage';
 import Navbar from '@/components/molecules/Navbar/Navbar';
+import DiaryWritePage from '@/components/pages/DiaryWritePage';
 import Auth from '@/components/organisms/Auth/Auth';
 import NotFound from '@/components/pages/NotFound';
 import { useAuthContext } from '../components/molecules/Context/Context';
@@ -45,6 +46,13 @@ const routerData: RouterElement[] = [
     label: '404',
     element: <NotFound />,
     private: false,
+  },
+  {
+    id: 4,
+    path: '/diarywrite',
+    label: 'DiaryWrite',
+    element: <DiaryWritePage />,
+    private: true,
   },
 ];
 

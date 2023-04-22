@@ -2,13 +2,14 @@ import { Fragment, useEffect } from 'react';
 import { createBrowserRouter, useNavigate } from 'react-router-dom';
 import { Router as RemixRouter } from '@remix-run/router/dist/router';
 
-import { ChildrenProps } from '@/@types/types.d';
 import MainPage from '@/components/pages/MainPage';
 import Navbar from '@/components/molecules/Navbar/Navbar';
 import DiaryWritePage from '@/components/pages/DiaryWritePage';
 import Auth from '@/components/organisms/Auth/Auth';
+import DiaryPage from '@/components/pages/DiaryPage';
 import NotFound from '@/components/pages/NotFound';
 import { useAuthContext } from '../components/molecules/Context/Context';
+import { ChildrenProps } from '@/@types/types.d';
 
 interface RouterElement {
   id: number;
@@ -52,6 +53,13 @@ const routerData: RouterElement[] = [
     path: '/diarywrite',
     label: 'DiaryWrite',
     element: <DiaryWritePage />,
+    private: true,
+  },
+  {
+    id: 5,
+    path: '/diary',
+    label: 'Diary',
+    element: <DiaryPage />,
     private: true,
   },
 ];

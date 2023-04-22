@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Logout from '@/components/molecules/Logout/Logout';
 import { useAuthContext } from '../Context/Context';
@@ -6,6 +6,7 @@ import apple_logo from '@/assets/Logo/apple_logo.svg';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isLoggedIn } = useAuthContext();
 
   return (
@@ -26,13 +27,19 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => navigate('/diarywrite')}
-              className="text-sm sm:text-md md:text-lg lg:text-lg font-medium text-white focus:outline-none"
+              disabled={location.pathname === '/diarywrite'}
+              className={`select-none text-sm sm:text-md md:text-lg lg:text-lg font-medium focus:outline-none ${
+                location.pathname === '/diarywrite' ? 'text-black' : 'text-white'
+              }`}
             >
               일기쓰기
             </button>
             <button
               onClick={() => navigate('/diary')}
-              className="text-sm sm:text-md md:text-lg lg:text-lg font-medium text-white focus:outline-none mx-3"
+              disabled={location.pathname === '/diary'}
+              className={`select-none text-sm sm:text-md md:text-lg lg:text-lg font-medium focus:outline-none mx-3 ${
+                location.pathname === '/diary' ? 'text-black' : 'text-white'
+              }`}
             >
               일기
             </button>

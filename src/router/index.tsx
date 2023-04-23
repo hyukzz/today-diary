@@ -8,7 +8,8 @@ import DiaryWritePage from '@/components/pages/DiaryWritePage';
 import Auth from '@/components/organisms/Auth/Auth';
 import DiaryPage from '@/components/pages/DiaryPage';
 import NotFound from '@/components/pages/NotFound';
-import { useAuthContext } from '../components/molecules/Context/Context';
+import Redirect from '@/components/organisms/Auth/Redirect';
+import { useAuthContext } from '@/components/molecules/Context/Context';
 import { ChildrenProps } from '@/@types/types.d';
 
 interface RouterElement {
@@ -61,6 +62,13 @@ const routerData: RouterElement[] = [
     label: 'Diary',
     element: <DiaryPage />,
     private: true,
+  },
+  {
+    id: 6,
+    path: '/redirect',
+    label: 'redirect',
+    element: <Redirect />,
+    private: false,
   },
 ];
 

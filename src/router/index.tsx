@@ -6,6 +6,7 @@ import MainPage from '@/components/pages/MainPage';
 import Navbar from '@/components/molecules/Navbar/Navbar';
 import DiaryWritePage from '@/components/pages/DiaryWritePage';
 import Auth from '@/components/organisms/Auth/Auth';
+import SignUp from '@/components/organisms/SignUp/SignUp';
 import DiaryPage from '@/components/pages/DiaryPage';
 import NotFound from '@/components/pages/NotFound';
 import { useAuthContext } from '@/components/molecules/Context/Context';
@@ -61,6 +62,13 @@ const routerData: RouterElement[] = [
     label: 'Diary',
     element: <DiaryPage />,
     private: true,
+  },
+  {
+    id: 6,
+    path: '/signup',
+    label: 'SignUp',
+    element: <SignUp />,
+    private: false,
   },
 ];
 

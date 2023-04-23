@@ -55,14 +55,12 @@ const Navbar = () => {
               >
                 로그인
               </button>
-              <a
-                href="https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp"
+              <button
+                onClick={() => navigate('/signup')}
                 className="text-blue-500 font-semibold select-none"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 회원 가입
-              </a>
+              </button>
             </>
           )}
         </div>

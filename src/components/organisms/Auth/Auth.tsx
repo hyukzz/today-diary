@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 
-import { useAuthContext } from '../../molecules/Context/Context';
+import { useAuthContext } from '@/components/molecules/Context/Context';
 import { auth, provider } from '@/firebase/config';
 import google_logo from '@/assets/Logo/google_logo.svg';
 import { notification } from '@/components/atoms/Toast';
@@ -10,31 +10,24 @@ import { notification } from '@/components/atoms/Toast';
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { saveAuthData, isLoggedIn } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
 
   const onGoogleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then(async (res) => {
-        const user = res.user;
+    try {
+      signInWithRedirect(auth, provider);
 
-        const accessToken = await user.getIdToken();
-        const uid = user.uid;
-
-        saveAuthData(accessToken, uid);
-        notification('success', '오늘의 기분을 기록해보세요!');
-
-        navigate('/');
-      })
-      .catch(() => {
-        notification('error', '로그인을 다시 시도해주세요.');
-      });
+      navigate('/redirect');
+    } catch (error) {
+      notification('error', '로그인을 다시 시도해주세요.');
+    }
   };
 
   useEffect(() => {
+    console.log(isLoggedIn);
     if (isLoggedIn && location.pathname === '/login') {
       navigate('/');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, location.pathname]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">

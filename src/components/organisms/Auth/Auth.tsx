@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 
 import { useAuthContext } from '@/components/molecules/Context/Context';
 import { auth, provider } from '@/firebase/config';
@@ -10,24 +10,31 @@ import { notification } from '@/components/atoms/Toast';
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn } = useAuthContext();
+  const { saveAuthData, isLoggedIn } = useAuthContext();
 
   const onGoogleLogin = () => {
-    try {
-      signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider)
+      .then(async (res) => {
+        const user = res.user;
 
-      navigate('/redirect');
-    } catch (error) {
-      notification('error', '로그인을 다시 시도해주세요.');
-    }
+        const accessToken = await user.getIdToken();
+        const uid = user.uid;
+
+        saveAuthData(accessToken, uid);
+        notification('success', '오늘의 일기를 기록해보세요!');
+
+        navigate('/');
+      })
+      .catch(() => {
+        notification('error', '로그인을 다시 시도해주세요.');
+      });
   };
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (isLoggedIn && location.pathname === '/login') {
       navigate('/');
     }
-  }, [isLoggedIn, location.pathname]);
+  }, [isLoggedIn]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">

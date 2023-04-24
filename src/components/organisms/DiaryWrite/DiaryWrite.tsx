@@ -1,15 +1,14 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, collection, where, getDocs, query } from 'firebase/firestore';
 
 import { db } from '@/firebase/config';
-import { EmotionType } from '@/@types/types';
-import { Diary } from '@/@types/types';
 import { notification } from '@/components/atoms/Toast';
 import { DateForm } from '@/components/atoms/Date';
 import { useAuthContext } from '@/components/molecules/Context/Context';
-import Emotion from '@/components/molecules/Emotion/Emotion';
+import Emotion from '@/components/molecules/EmotionIcon/Emotion';
+import { EmotionType, Diary } from '@/@types/types';
 
 const DiaryWirte = () => {
   const navigate = useNavigate();
@@ -40,7 +39,21 @@ const DiaryWirte = () => {
     };
   }, []);
 
-  const postDiaryTestData = async () => {
+  const checkIfDiaryExistsForToday = async (uid: string | null) => {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    const currentDateString = currentDate.toLocaleString('co-KR', { timeZone: 'Asia/Seoul' });
+
+    const querySnapshot = await getDocs(
+      collection(db, `diary/${uid}/diaries`),
+      where('date', '==', currentDateString),
+    );
+
+    return !querySnapshot.empty;
+  };
+
+  const postDiaryData = async () => {
     if (!isLoggedIn) return;
 
     if (!text) {
@@ -48,7 +61,14 @@ const DiaryWirte = () => {
       return;
     }
 
+    const diaryExistsForToday = await checkIfDiaryExistsForToday(uid);
+
+    if (diaryExistsForToday) {
+      notification('warning', '오늘의 일기를 이미 작성하셨습니다!');
+      return;
+    }
     const currentDate = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+
     let myuuid = uuidv4();
 
     const diaryData: Diary = {
@@ -65,7 +85,7 @@ const DiaryWirte = () => {
       notification('success', '오늘의 일기가 저장됐습니다!');
       navigate('/diary');
     } catch (error) {
-      notification('error', '일기 저장에 실패했습니다.');
+      notification('error', '다시 시도해주세요.');
     }
   };
 
@@ -128,7 +148,7 @@ const DiaryWirte = () => {
       </div>
       <button
         className="px-6 py-3 text-xl md:text-3xl rounded-full bg-gray-300 hover:bg-gray-400 text-black font-bold mb-8 transition-colors duration-300 shadow-md"
-        onClick={() => postDiaryTestData()}
+        onClick={() => postDiaryData()}
       >
         오늘 기록하기
       </button>

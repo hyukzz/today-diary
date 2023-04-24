@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, doc, collection, where, getDocs, query } from 'firebase/firestore';
+import { setDoc, doc, collection, where, getDocs } from 'firebase/firestore';
 
 import { db } from '@/firebase/config';
 import { notification } from '@/components/atoms/Toast';
@@ -43,7 +43,7 @@ const DiaryWirte = () => {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
 
-    const currentDateString = currentDate.toLocaleString('co-KR', { timeZone: 'Asia/Seoul' });
+    const currentDateString = currentDate.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
 
     const querySnapshot = await getDocs(
       collection(db, `diary/${uid}/diaries`),

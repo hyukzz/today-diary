@@ -7,6 +7,7 @@ export type ChildrenProps = {
 export interface Diary {
   date: string;
   text: string;
+  time: string;
   emotion: string;
   id: string;
 }

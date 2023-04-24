@@ -34,11 +34,13 @@ const DiaryList = () => {
       orderBy('date'),
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const diaryData: { date: string; emotion: string; text: string; id: string }[] = [];
+      const diaryData: { date: string; time: string; emotion: string; text: string; id: string }[] =
+        [];
 
       querySnapshot.forEach((doc) => {
         const data = doc.data() as {
           date: string;
+          time: string;
           emotion: string;
           text: string;
           id: string;

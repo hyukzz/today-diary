@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { collection, query, orderBy, where, onSnapshot } from 'firebase/firestore';
 
 import { db } from '@/firebase/config';
+import { DateForm } from '@/components/atoms/Date';
 import Loading from '@/components/atoms/Loading/Loading';
 import { useAuthContext } from '@/components/molecules/Context/Context';
 import DiaryHeader from '@/components/molecules/DiaryHeader/DiaryHeader';
@@ -23,12 +24,8 @@ const DiaryList = () => {
   const diaryData = async (year: number, month: number) => {
     if (!isLoggedIn) return;
 
-    const startOfMonth = new Date(year, month, 1).toLocaleDateString('ko-KR', {
-      timeZone: 'Asia/Seoul',
-    });
-    const endOfMonth = new Date(year, month + 1, 0).toLocaleDateString('ko-KR', {
-      timeZone: 'Asia/Seoul',
-    });
+    const startOfMonth = DateForm(new Date(year, month, 1));
+    const endOfMonth = DateForm(new Date(year, month + 1, 0));
 
     const q = query(
       collection(db, `diary/${uid}/diaries`),

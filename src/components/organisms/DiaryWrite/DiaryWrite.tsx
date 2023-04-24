@@ -65,11 +65,15 @@ const DiaryWirte = () => {
     }
 
     const currentDate = DateForm(new Date());
+
+    const writeTime = new Date().toLocaleString('kos-KR', { timeZone: 'Asia/Seoul' });
+
     let myuuid = uuidv4();
 
     const diaryData: Diary = {
       id: myuuid,
       date: currentDate,
+      time: writeTime,
       emotion: selectedEmotion,
       text,
     };

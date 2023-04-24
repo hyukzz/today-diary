@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, doc, collection, where, getDocs } from 'firebase/firestore';
+import { setDoc, doc, collection, where, getDocs, query, getDoc } from 'firebase/firestore';
 
 import { db } from '@/firebase/config';
 import { notification } from '@/components/atoms/Toast';
@@ -40,14 +40,10 @@ const DiaryWirte = () => {
   }, []);
 
   const checkIfDiaryExistsForToday = async (uid: string | null) => {
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-
-    const currentDateString = currentDate.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+    const currentDate = DateForm(new Date());
 
     const querySnapshot = await getDocs(
-      collection(db, `diary/${uid}/diaries`),
-      where('date', '==', currentDateString),
+      query(collection(db, `diary/${uid}/diaries`), where('date', '==', currentDate)),
     );
 
     return !querySnapshot.empty;
@@ -67,8 +63,8 @@ const DiaryWirte = () => {
       notification('warning', '오늘의 일기를 이미 작성하셨습니다!');
       return;
     }
-    const currentDate = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
 
+    const currentDate = DateForm(new Date());
     let myuuid = uuidv4();
 
     const diaryData: Diary = {

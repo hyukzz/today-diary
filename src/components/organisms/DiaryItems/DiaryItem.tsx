@@ -12,7 +12,7 @@ type EmotionIconType = {
 };
 
 const DiaryItem = ({ item }: { item: Diary }) => {
-  const { date, emotion, text, id } = item;
+  const { time, emotion, text, id } = item;
   const { uid } = useAuthContext();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +52,7 @@ const DiaryItem = ({ item }: { item: Diary }) => {
   };
   return (
     <div className="flex flex-col border rounded-3xl border-gray-300 bg-white shadow-md p-4 my-6 mx-auto md:max-w-lg lg:max-w-xl xl:max-w-2xl max-w-xs">
-      <div className="text-gray-500 text-sm">{date}</div>
+      <div className="text-gray-500 text-sm">{time}</div>
       <div className="flex mt-2">
         {emotion && (
           <div className="mt-4 mr-4 text-center">
